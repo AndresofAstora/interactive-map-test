@@ -259,7 +259,30 @@ function zoom(factor) {
 function applyTransform() {
     mapWrapper.style.transform = `translate(${offsetX}px, ${offsetY}px) scale(${scale})`;
 }
+    
+mapView.addEventListener('wheel', e => {
+    e.preventDefault();
 
+    const rect = mapWrapper.getBoundingClientRect();
+
+    // mouse position relative to map
+    const mouseX = e.clientX - rect.left;
+    const mouseY = e.clientY - rect.top;
+
+    const zoomFactor = e.deltaY < 0 ? 1.1 : 0.9;
+
+    // adjust offset so zoom centers on cursor
+    offsetX -= mouseX * (zoomFactor - 1);
+    offsetY -= mouseY * (zoomFactor - 1);
+
+    scale *= zoomFactor;
+
+    // clamp zoom
+    scale = Math.min(Math.max(scale, 0.2), 5);
+
+    applyTransform();
+}, { passive: false });
+    
 /* PAN */
 mapView.addEventListener('mousedown', e => {
     isDragging = true;
@@ -278,11 +301,6 @@ window.addEventListener('mousemove', e => {
     offsetY = e.clientY - startY;
 
     applyTransform();
-});
-
-window.addEventListener('mouseup', () => {
-    isDragging = false;
-    mapView.classList.remove('dragging');
 });
 
 window.addEventListener('mousemove', e => {
