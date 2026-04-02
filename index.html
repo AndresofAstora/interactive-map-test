@@ -261,11 +261,22 @@ function applyTransform() {
 }
 
 /* PAN */
-mapView.addEventListener('mousedown', e => {
-    isDragging = true;
-    startX = e.clientX - offsetX;
-    startY = e.clientY - offsetY;
-    mapView.classList.add('dragging');
+mapView.addEventListener('wheel', e => {
+    e.preventDefault(); // prevent page scrolling
+
+    const rect = mapWrapper.getBoundingClientRect();
+    const mouseX = e.clientX - rect.left;
+    const mouseY = e.clientY - rect.top;
+
+    // Zoom factor: scroll up = zoom in, scroll down = zoom out
+    const zoomFactor = e.deltaY < 0 ? 1.1 : 0.9;
+
+    // Optional: adjust offset so zoom is centered on cursor
+    offsetX = offsetX - mouseX * (zoomFactor - 1);
+    offsetY = offsetY - mouseY * (zoomFactor - 1);
+
+    scale *= zoomFactor;
+    applyTransform();
 });
 
 window.addEventListener('mouseup', () => {
