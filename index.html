@@ -37,11 +37,14 @@ body {
 
 /* MAP */
 .map-container {
-    position: relative;
+    position: fixed; /* full viewport overlay */
+    top: 0;
+    left: 0;
     width: 100vw;
     height: 100vh;
-    overflow: hidden;
+    overflow: hidden; /* prevent scrollbars */
     cursor: grab;
+    z-index: 100; /* above landing page */
 }
 
 .map-container.dragging {
@@ -53,10 +56,16 @@ body {
     top: 0;
     left: 0;
     transform-origin: top left;
+    width: 100%; 
+    height: 100%;
 }
 
 .map-img {
     display: block;
+    max-width: none; /* don't auto-shrink */
+    max-height: none;
+    user-select: none;
+    pointer-events: none; /* allows dragging container instead */
 }
 
 #markers {
@@ -215,7 +224,12 @@ function openMap(key) {
     menu.classList.add('hidden');
     mapView.classList.remove('hidden');
 
-    resetView();
+    // Reset zoom & pan
+    scale = 1;
+    offsetX = 0;
+    offsetY = 0;
+    applyTransform();
+
     loadMarkers();
 }
 
