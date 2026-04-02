@@ -318,6 +318,23 @@ mapWrapper.addEventListener('mousemove', e => {
     document.getElementById('coords').innerText = `X: ${x} Y: ${y}`;
 });
 
+mapWrapper.addEventListener('click', e => {
+    // ignore clicks on UI
+    if (e.target.closest('.legend, .zoom-controls, .back-btn')) return;
+
+    const rect = mapWrapper.getBoundingClientRect();
+
+    const x = Math.round((e.clientX - rect.left) / scale);
+    const y = Math.round((e.clientY - rect.top) / scale);
+
+    const text = `${x}, ${y}`;
+
+    navigator.clipboard.writeText(text);
+
+    // optional visual feedback
+    //showCopied(text, e.clientX, e.clientY);
+});
+
 /* LEGEND */
 document.querySelectorAll('.legend input').forEach(cb => {
     cb.addEventListener('change', () => {
