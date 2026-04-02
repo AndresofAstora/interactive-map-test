@@ -1,8 +1,53 @@
 body, html {
   margin: 0;
   height: 100%;
+  background-color: #000;
+  color: #fff;
+  font-family: Arial, sans-serif;
 }
+
 #map {
   height: 100vh;
   width: 100%;
+}
+
+/* Legend panel */
+#legend {
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  background: rgba(20, 20, 20, 0.9);
+  padding: 15px;
+  border-radius: 8px;
+  z-index: 1000;
+  max-width: 200px;
+}
+
+#legend h3 {
+  margin-top: 0;
+  font-size: 16px;
+}
+
+.legend-item {
+  display: flex;
+  align-items: center;
+  margin-bottom: 8px;
+}
+
+.legend-item input {
+  margin-right: 8px;
+}
+
+#toggleAll {
+  margin-top: 10px;
+  width: 100%;
+  padding: 6px;
+  background: #333;
+  color: #fff;
+  border: none;
+  cursor: pointer;
+}
+
+#toggleAll:hover {
+  background: #555;
 }
