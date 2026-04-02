@@ -336,6 +336,7 @@ mapWrapper.addEventListener('mousemove', e => {
 });
 
 mapWrapper.addEventListener('click', e => {
+    // ignore clicks on UI
     if (e.target.closest('.legend, .zoom-controls, .back-btn')) return;
 
     const rect = mapWrapper.getBoundingClientRect();
@@ -343,22 +344,10 @@ mapWrapper.addEventListener('click', e => {
     const x = Math.round((e.clientX - rect.left) / scale);
     const y = Math.round((e.clientY - rect.top) / scale);
 
-    const text = `x:${x}, y:${y}`;
+    const text = `${x}, ${y}`;
 
-    // force clipboard write
-    if (navigator.clipboard && window.isSecureContext) {
-        navigator.clipboard.writeText(text);
-    } else {
-        // fallback (guaranteed)
-        const temp = document.createElement('textarea');
-        temp.value = text;
-        document.body.appendChild(temp);
-        temp.select();
-        document.execCommand('copy');
-        document.body.removeChild(temp);
-    }
+    navigator.clipboard.writeText(text);
 
-    showCopied(text, e.clientX, e.clientY);
 });
 
 /* LEGEND */
