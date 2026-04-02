@@ -167,9 +167,16 @@ const markerData = [
     {x: 600, y: 500, type: 'enemy'}
 ];
 
-function openMap(map) {
+let currentMap = null;
+
+function openMap(mapKey) {
+    currentMap = maps[mapKey];
+
     document.getElementById('menu').classList.add('hidden');
     document.getElementById('mapView').classList.remove('hidden');
+
+    document.getElementById('mapImage').src = currentMap.img;
+
     loadMarkers();
 }
 
@@ -196,7 +203,7 @@ function loadMarkers() {
     const container = document.getElementById('markers');
     container.innerHTML = '';
 
-    markerData.forEach(m => {
+    currentMap.markers.forEach(m => {
         const div = document.createElement('div');
         div.className = `marker ${m.type}`;
         div.style.left = m.x + 'px';
@@ -204,6 +211,29 @@ function loadMarkers() {
         div.dataset.type = m.type;
         container.appendChild(div);
     });
+}
+
+const maps = {
+    map1: {
+        img: "maps/electrocaves1.png",
+        markers: [
+            {x: 200, y: 150, type: 'enemy'},
+            {x: 400, y: 300, type: 'loot'}
+        ]
+    },
+    map2: {
+        img: "maps/electrocaves2.png",
+        markers: [
+            {x: 100, y: 200, type: 'loot'}
+        ]
+    },
+    map3: {
+        img: "maps/electrocaves3.png",
+        markers: [
+            {x: 500, y: 400, type: 'enemy'}
+        ]
+    }
+};
 }
 
 function toggleType(type, checkbox) {
