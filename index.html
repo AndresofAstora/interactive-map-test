@@ -159,7 +159,20 @@
 </div>
 
 <script>
-let scale = 1;
+document.addEventListener('DOMContentLoaded', () => {
+
+    let scale = 1;
+
+    const mapImg = document.getElementById('mapImage');
+
+    mapImg.addEventListener('mousemove', e => {
+        const rect = mapImg.getBoundingClientRect();
+        const x = Math.round((e.clientX - rect.left) / scale);
+        const y = Math.round((e.clientY - rect.top) / scale);
+        document.getElementById('coords').innerText = `X: ${x} Y: ${y}`;
+    });
+
+});
 
 const markerData = [
     {x: 200, y: 150, type: 'enemy'},
