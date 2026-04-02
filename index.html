@@ -329,7 +329,7 @@ mapWrapper.addEventListener('click', e => {
 
     const text = `${x}, ${y}`;
 
-    navigator.clipboard.writeText(text);
+    navigator.clipboard?.writeText(text) || prompt("Copy:", text);
 
     // optional visual feedback
     //showCopied(text, e.clientX, e.clientY);
