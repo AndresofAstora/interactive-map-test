@@ -60,9 +60,12 @@ const layerGroups = {
 
 // --- Marker Data ---
 const markers = [
-  { name: 'A', coords: [500, 400], type: 'type1', icon: icon1 },
-  { name: 'B', coords: [800, 1200], type: 'type1', icon: icon1 },
-  { name: 'C', coords: [1200, 1500], type: 'type2', icon: icon2 }
+  { name: 'A', coords: [500, 400], type: 'Start', icon: icon1 },
+  { name: 'B', coords: [800, 1200], type: 'Checkpoint', icon: icon3 },
+  { name: 'A', coords: [500, 400], type: 'Bit Chest', icon: icon4 },
+  { name: 'B', coords: [800, 1200], type: 'Part Chest', icon: icon5 },
+  { name: 'A', coords: [500, 400], type: 'Color Capsule', icon: icon6 },
+  { name: 'B', coords: [800, 1200], type: 'End', icon: icon2 }
 ];
 
 // Add markers to groups
