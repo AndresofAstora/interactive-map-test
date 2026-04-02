@@ -35,13 +35,13 @@ const icon3 = L.icon({
 });
 
 const icon4 = L.icon({
-  iconUrl: 'images/marker-megabyte-bitchest.png',
+  iconUrl: 'images/marker-megabyte-bit.png',
   iconSize: [32, 32],
   iconAnchor: [16, 32]
 });
 
 const icon5 = L.icon({
-  iconUrl: 'images/marker-megabyte-partchest.png',
+  iconUrl: 'images/marker-megabyte-part.png',
   iconSize: [32, 32],
   iconAnchor: [16, 32]
 });
