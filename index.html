@@ -262,21 +262,13 @@ function applyTransform() {
 
 /* PAN */
 mapView.addEventListener('mousedown', e => {
-    if (e.target.closest('.legend, .zoom-controls, .back-btn')) return;
     isDragging = true;
     startX = e.clientX - offsetX;
     startY = e.clientY - offsetY;
-    
-    // store starting mouse position relative to current offset
-    startX = e.clientX - offsetX;
-    startY = e.clientY - offsetY;
-
-    mapView.classList.add('dragging');
 });
 
 window.addEventListener('mouseup', () => {
     isDragging = false;
-    mapView.classList.remove('dragging');
 });
 
 window.addEventListener('mousemove', e => {
