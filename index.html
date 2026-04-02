@@ -90,9 +90,9 @@ body {
 
 .zoom-controls {
     position: absolute;
+    top: 15px;
     right: 15px;
-    top: 50%;
-    transform: translateY(-50%);
+    transform: none; /* remove vertical centering */
 }
 
 .zoom-btn {
@@ -105,9 +105,9 @@ body {
 
 .legend {
     position: absolute;
+    top: 60px;      /* pushes it below the back button */
     left: 15px;
-    top: 50%;
-    transform: translateY(-50%);
+    transform: none; /* remove vertical centering */
     background: #1a1d24;
     padding: 10px;
     border: 1px solid #333;
