@@ -17,37 +17,37 @@ map.fitBounds(bounds);
 
 // --- Custom Icons ---
 const icon1 = L.icon({
-  iconUrl: 'images/marker-start.png',  // replace with different icon if desired
+  iconUrl: 'images/marker-megabyte-start.png',  // replace with different icon if desired
   iconSize: [32, 32],
   iconAnchor: [16, 32]
 });
 
 const icon2 = L.icon({
-  iconUrl: 'images/marker-end.png',
+  iconUrl: 'images/marker-megabyte-end.png',
   iconSize: [32, 32],
   iconAnchor: [16, 32]
 });
 
 const icon3 = L.icon({
-  iconUrl: 'images/marker-checkpoint.png',
+  iconUrl: 'images/marker-megabyte-checkpoint.png',
   iconSize: [32, 32],
   iconAnchor: [16, 32]
 });
 
 const icon4 = L.icon({
-  iconUrl: 'images/marker-bitchest.png',
+  iconUrl: 'images/marker-megabyte-bitchest.png',
   iconSize: [32, 32],
   iconAnchor: [16, 32]
 });
 
 const icon5 = L.icon({
-  iconUrl: 'images/marker-partchest.png',
+  iconUrl: 'images/marker-megabyte-partchest.png',
   iconSize: [32, 32],
   iconAnchor: [16, 32]
 });
 
 const icon6 = L.icon({
-  iconUrl: 'images/marker-color.png',
+  iconUrl: 'images/marker-megabyte-color.png',
   iconSize: [32, 32],
   iconAnchor: [16, 32]
 });
