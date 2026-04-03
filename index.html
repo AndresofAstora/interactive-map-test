@@ -238,21 +238,21 @@ const maps = {
     map1: {
         img: "maps/electrocaves1.png",
         markers: [
-            {x: 100, y: 150, type: 'start'},
-            {x: 200, y: 150, type: 'checkpoint'},
-            {x: 300, y: 150, type: 'checkpoint'},
+            {x:153, y:387, type: 'start'},
+            {x:1538, y:511, type: 'checkpoint'},
+            {x:1589, y:161, type: 'checkpoint'},
             {x: 400, y: 150, type: 'checkpoint'},
             {x: 500, y: 150, type: 'checkpoint'},
-            {x: 600, y: 150, type: 'bit-chest'},
-            {x: 700, y: 150, type: 'bit-chest'},
-            {x: 800, y: 150, type: 'bit-chest'},
-            {x: 900, y: 150, type: 'bit-chest'},
+            {x:259, y:225, type: 'bit-chest'},
+            {x:902, y:451, type: 'bit-chest'},
+            {x:850, y:690, type: 'bit-chest'},
+            {x:1533, y:686, type: 'bit-chest'},
             {x: 1000, y: 150, type: 'bit-chest'},
             {x: 1100, y: 150, type: 'bit-chest'},
             {x: 1200, y: 150, type: 'bit-chest'},
-            {x: 1300, y: 150, type: 'part-chest'},
-            {x: 1400, y: 150, type: 'part-chest'},
-            {x: 1500, y: 150, type: 'part-chest'},
+            {x:383, y:236, type: 'part-chest'},
+            {x:850, y:690, type: 'part-chest'},
+            {x:850, y:690, type: 'part-chest'},
             {x: 1600, y: 150, type: 'part-chest'},
             {x: 1700, y: 150, type: 'part-chest'},
             {x: 1800, y: 150, type: 'color-capsule'},
@@ -355,21 +355,21 @@ function applyTransform() {
 mapWrapper.addEventListener('wheel', e => {
     e.preventDefault();
 
-    const rect = mapWrapper.getBoundingClientRect();
-
-    const mouseX = e.clientX - rect.left;
-    const mouseY = e.clientY - rect.top;
+    const mouseX = e.clientX;
+    const mouseY = e.clientY;
 
     const zoomFactor = e.deltaY < 0 ? 1.1 : 0.9;
 
-    // adjust offset so zoom centers on cursor
-    offsetX -= mouseX * (zoomFactor - 1);
-    offsetY -= mouseY * (zoomFactor - 1);
+    // convert mouse to map space BEFORE zoom
+    const mapX = (mouseX - offsetX) / scale;
+    const mapY = (mouseY - offsetY) / scale;
 
     scale *= zoomFactor;
-
-    // clamp zoom
     scale = Math.min(Math.max(scale, 0.2), 5);
+
+    // adjust offset so zoom stays centered on cursor
+    offsetX = mouseX - mapX * scale;
+    offsetY = mouseY - mapY * scale;
 
     applyTransform();
 }, { passive: false });
@@ -396,23 +396,17 @@ window.addEventListener('mousemove', e => {
 
 /* COORDS */
 mapWrapper.addEventListener('mousemove', e => {
-    const rect = mapWrapper.getBoundingClientRect();
-
-    // convert screen → map space
-    const x = Math.round((e.clientX - rect.left) / scale);
-    const y = Math.round((e.clientY - rect.top) / scale);
+    const x = Math.round((e.clientX - offsetX) / scale);
+    const y = Math.round((e.clientY - offsetY) / scale);
 
     document.getElementById('coords').innerText = `X: ${x} Y: ${y}`;
 });
 
 mapWrapper.addEventListener('click', e => {
-    // ignore clicks on UI
     if (e.target.closest('.legend, .zoom-controls, .back-btn')) return;
 
-    const rect = mapWrapper.getBoundingClientRect();
-
-    const x = Math.round((e.clientX - rect.left) / scale);
-    const y = Math.round((e.clientY - rect.top) / scale);
+    const x = Math.round((e.clientX - offsetX) / scale);
+    const y = Math.round((e.clientY - offsetY) / scale);
 
     const text = `x:${x}, y:${y}`;
 
