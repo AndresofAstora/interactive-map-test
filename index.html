@@ -173,10 +173,14 @@ body {
 /* MARKERS */
 .marker {
     position: absolute;
-    width: 10px;
-    height: 10px;
-    border-radius: 50%;
+    width: 24px;          /* adjust size */
+    height: 24px;
     transform: translate(-50%, -50%);
+    pointer-events: none;
+
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
 }
 
 .enemy { background: red; }
@@ -269,6 +273,15 @@ const maps = {
     }
 };
 
+const markerIcons = {
+    start: "maps/marker-start.png",
+    checkpoint: "maps/marker-checkpoint.png",
+    "bit-chest": "maps/marker-bitchest.png",
+    "part-chest": "maps/marker-partchest.png",
+    "color-capsule": "maps/marker-colorcapsule.png",
+    "stage-exit": "maps/marker-stageexit.png"
+};
+
 const menu = document.getElementById('menu');
 const mapView = document.getElementById('mapView');
 const mapWrapper = document.getElementById('mapWrapper');
@@ -307,12 +320,21 @@ function openMap(key) {
 /* MARKERS */
 function loadMarkers() {
     markersContainer.innerHTML = '';
+
     currentMap.markers.forEach(m => {
         const el = document.createElement('div');
+
         el.className = `marker ${m.type}`;
         el.style.left = m.x + 'px';
         el.style.top = m.y + 'px';
+
         el.dataset.type = m.type;
+
+        // apply image
+        if (markerIcons[m.type]) {
+            el.style.backgroundImage = `url(${markerIcons[m.type]})`;
+        }
+
         markersContainer.appendChild(el);
     });
 }
