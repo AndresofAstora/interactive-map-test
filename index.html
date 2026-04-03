@@ -352,24 +352,19 @@ function applyTransform() {
     mapWrapper.style.transform = `translate(${offsetX}px, ${offsetY}px) scale(${scale})`;
 }
     
-mapWrapper.addEventListener('wheel', e => {
+mapView.addEventListener('wheel', e => {
     e.preventDefault();
-
-    const mouseX = e.clientX;
-    const mouseY = e.clientY;
 
     const zoomFactor = e.deltaY < 0 ? 1.1 : 0.9;
 
-    // convert mouse to map space BEFORE zoom
-    const mapX = (mouseX - offsetX) / scale;
-    const mapY = (mouseY - offsetY) / scale;
+    const mapX = (e.clientX - offsetX) / scale;
+    const mapY = (e.clientY - offsetY) / scale;
 
     scale *= zoomFactor;
     scale = Math.min(Math.max(scale, 0.2), 5);
 
-    // adjust offset so zoom stays centered on cursor
-    offsetX = mouseX - mapX * scale;
-    offsetY = mouseY - mapY * scale;
+    offsetX = e.clientX - mapX * scale;
+    offsetY = e.clientY - mapY * scale;
 
     applyTransform();
 }, { passive: false });
@@ -385,24 +380,22 @@ window.addEventListener('mouseup', () => {
     isDragging = false;
 });
 
-window.addEventListener('mousemove', e => {
-    if (!isDragging) return;
-
-    offsetX = e.clientX - startX;
-    offsetY = e.clientY - startY;
-
-    applyTransform();
-});
-
-/* COORDS */
-mapWrapper.addEventListener('mousemove', e => {
+mapView.addEventListener('mousemove', e => {
     const x = Math.round((e.clientX - offsetX) / scale);
     const y = Math.round((e.clientY - offsetY) / scale);
 
     document.getElementById('coords').innerText = `X: ${x} Y: ${y}`;
 });
 
-mapWrapper.addEventListener('click', e => {
+/* COORDS */
+mapView.addEventListener('mousemove', e => {
+    const x = Math.round((e.clientX - offsetX) / scale);
+    const y = Math.round((e.clientY - offsetY) / scale);
+
+    document.getElementById('coords').innerText = `X: ${x} Y: ${y}`;
+});
+
+mapView.addEventListener('click', e => {
     if (e.target.closest('.legend, .zoom-controls, .back-btn')) return;
 
     const x = Math.round((e.clientX - offsetX) / scale);
