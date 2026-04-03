@@ -140,18 +140,23 @@ body {
 }
     
 #toggleAll {
-    margin-top: 5px; /* space below the legend options */
+    margin-top: 5px;
     padding: 6px 10px;
     border-radius: 6px;
     cursor: pointer;
-    background: #333;         /* dark gray background */
-    color: #fff !important;              /* white text */
+
+    background: #333;
+    color: #fff;
     border: 1px solid rgba(255,255,255,0.08);
     text-align: center;
-}
 
+    font: inherit;
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+}
 #toggleAll:hover {
-    background: #444;         /* slightly lighter gray on hover */
+    background: #444;
 }
 
 .coords {
