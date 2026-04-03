@@ -78,15 +78,30 @@ body {
 }
 
 /* UI */
+    /* Unified frosted-glass style for all panels/buttons */
+.ui-panel {
+    background: rgba(26, 29, 36, 0.75);
+    backdrop-filter: blur(6px);
+    -webkit-backdrop-filter: blur(6px);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 10px;
+    padding: 10px;
+    color: #e5e7eb;
+    font-family: Arial, sans-serif;
+}
+    
 .back-btn {
     position: absolute;
     top: 15px;
     left: 15px;
-    padding: 10px;
-    background: #1a1d24;
-    border: 1px solid #333;
     cursor: pointer;
+    text-align: center;
+    padding: 8px 12px;
+    display: inline-block;
     z-index: 10;
+}
+.back-btn.ui-panel {
+    display: inline-block;
 }
 
 .zoom-controls {
@@ -94,20 +109,21 @@ body {
     top: 15px;
     right: 15px;
     transform: none;
-    background: rgba(26, 29, 36, 0.75);
-    backdrop-filter: blur(6px);
-    -webkit-backdrop-filter: blur(6px);
-    border: 1px solid rgba(255,255,255,0.08);
-    border-radius: 10px;
-    padding: 6px;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
 }
 
 .zoom-btn {
-    margin: 5px 0;
-    padding: 10px;
-    background: #1a1d24;
-    border: 1px solid #333;
+    width: 36px;
+    height: 36px;
+    line-height: 36px;
+    text-align: center;
+    border-radius: 6px;
+    border: 1px solid rgba(255,255,255,0.08);
+    background: rgba(255,255,255,0.05);
     cursor: pointer;
+    transition: 0.15s;
 }
 
 .legend {
